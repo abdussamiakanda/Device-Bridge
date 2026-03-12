@@ -1,25 +1,8 @@
--- Optional: strict retention cleanup, even when no browser is open.
+-- Optional: run cleanup on a schedule when no browser is open.
 -- Run after schema.sql. Requires pg_cron in your Supabase project.
+-- Uses public.cleanup_device_bridge_expired() and public.retention_interval() from schema.sql.
 
 create extension if not exists pg_cron with schema extensions;
-
-create or replace function public.cleanup_device_bridge_expired()
-returns void
-language plpgsql
-security definer
-as $$
-begin
-  delete from storage.objects
-  where bucket_id = 'device-bridge-files'
-    and created_at < now() - interval '30 minutes';
-
-  delete from public.shared_files
-  where created_at < now() - interval '30 minutes';
-
-  delete from public.clipboard_messages
-  where created_at < now() - interval '30 minutes';
-end;
-$$;
 
 do $$
 declare

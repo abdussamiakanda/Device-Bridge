@@ -7,7 +7,7 @@
   --ink-muted: #4a5573;
   --panel: rgba(255, 255, 255, 0.74);
   --line: rgba(18, 52, 87, 0.22);
-  --accent: #00708f;
+  --accent: #5a6578;
 }
 
 * {
@@ -31,6 +31,22 @@ body {
   width: min(1100px, calc(100vw - 1.5rem));
   margin: 0 auto;
   padding: clamp(0.75rem, 2vw, 1.25rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+}
+
+#root:has(.enter-page) {
+  min-height: 100vh;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  background: #dde1e7;
+}
+
+#root:has(.app-layout) {
+  min-height: 100vh;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  background: #dde1e7;
 }
 
 code {

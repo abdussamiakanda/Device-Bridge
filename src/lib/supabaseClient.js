@@ -5,16 +5,14 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey)
 
-export function createSupabaseClient(roomCodeHash) {
-  if (!isSupabaseConfigured || !roomCodeHash) {
+let client = null
+
+export function getSupabaseClient() {
+  if (!isSupabaseConfigured) {
     return null
   }
-
-  return createClient(supabaseUrl, supabaseAnonKey, {
-    global: {
-      headers: {
-        'x-room-code-hash': roomCodeHash,
-      },
-    },
-  })
+  if (!client) {
+    client = createClient(supabaseUrl, supabaseAnonKey)
+  }
+  return client
 }

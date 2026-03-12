@@ -1,8 +1,12 @@
 /* ========== App layout (in-room) ========== */
 .app-layout {
   min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: clamp(0.75rem, 2vw, 1.25rem) clamp(0.75rem, 2vw, 1.25rem) clamp(1.5rem, 4vw, 2.5rem);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .app-bar {
@@ -10,57 +14,91 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.75rem 0 1rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(18, 52, 87, 0.08);
+  padding: 0.85rem 0 1rem;
+  margin-bottom: 0.25rem;
+  border-bottom: none;
+  background: #dde1e7;
 }
 
 .app-bar-brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
 .app-bar-logo {
-  font-size: 28px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent);
+  flex-shrink: 0;
+}
+
+.app-bar-logo svg {
+  display: block;
 }
 
 .app-bar-title {
+  margin: 0;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.65rem;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  line-height: 1.2;
+  color: #595959;
 }
 
 .app-bar-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
+}
+
+.room-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.room-badge-icon svg {
+  display: block;
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--ink-muted);
-  border: 1px solid rgba(18, 52, 87, 0.12);
-  padding: 0.5rem 0.9rem;
+  background: #dde1e7;
+  color: #595959;
+  border: none;
+  padding: 0.5rem 0.85rem;
   font-size: 0.875rem;
-  border-radius: 10px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px rgba(255, 255, 255, 0.45);
+  transition: color 0.2s, box-shadow 0.2s ease;
 }
 
 .btn-ghost:hover {
   color: var(--accent);
-  border-color: rgba(0, 112, 143, 0.25);
-  background: rgba(0, 112, 143, 0.06);
+  box-shadow: 3px 3px 6px #babecc, -6px -6px 12px rgba(255, 255, 255, 0.5);
 }
 
-.btn-ghost .material-symbols-outlined {
-  font-size: 18px !important;
+.btn-ghost:active {
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.btn-ghost-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.btn-ghost-icon svg {
+  display: block;
 }
 
 .app-shell {
@@ -68,13 +106,26 @@
   flex-direction: column;
   gap: 1.5rem;
   flex: 1;
+  padding-top: 0.25rem;
 }
 
 .app-intro {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  line-height: 1.5;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.55;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-intro-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .content-grid {
@@ -82,6 +133,166 @@
   grid-template-columns: 1.2fr 1fr;
   gap: 1.5rem;
   align-items: start;
+}
+
+@media (min-width: 900px) {
+  .content-grid {
+    gap: 1.75rem;
+  }
+}
+
+/* ========== App layout — neumorphism (match enter page) ========== */
+.app-layout .panel {
+  background: #dde1e7;
+  border: none;
+  border-radius: 20px;
+  box-shadow: -3px -3px 7px rgba(255, 255, 255, 0.45), 2px 2px 5px rgba(94, 104, 121, 0.29);
+}
+
+.app-layout .panel::before {
+  display: none;
+}
+
+.app-layout .panel:hover {
+  box-shadow: -3px -3px 7px rgba(255, 255, 255, 0.45), 2px 2px 5px rgba(94, 104, 121, 0.29);
+}
+
+.app-layout h2 {
+  color: #595959;
+}
+
+.app-layout .section-icon {
+  color: var(--accent);
+}
+
+.app-layout .room-badge {
+  background: #dde1e7;
+  border: none;
+  box-shadow: inset 2px 2px 4px #babecc, inset -4px -4px 8px rgba(255, 255, 255, 0.45);
+  color: var(--accent);
+}
+
+/* Neumorphic textarea */
+.app-layout .card-text textarea {
+  background: #dde1e7;
+  border: none;
+  color: #595959;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.app-layout .card-text textarea:focus {
+  background: #ffffff;
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.app-layout .card-text textarea::placeholder {
+  color: #6b7280;
+}
+
+.app-layout .char-count {
+  background: transparent;
+  color: var(--accent);
+}
+
+.app-layout .textarea-wrapper:focus-within .char-count {
+  background: #ffffff;
+}
+
+
+/* Result box */
+.app-layout .result-box {
+  background: #dde1e7;
+  border: none;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.app-layout .result-head {
+  color: var(--accent);
+}
+
+.app-layout .result-box p {
+  color: #595959;
+}
+
+.app-layout .result-footer small {
+  color: #6b7280;
+}
+
+.app-layout .copy-btn {
+  background: #dde1e7;
+  color: #595959;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px rgba(255, 255, 255, 0.45);
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-layout .copy-btn:hover {
+  color: var(--accent);
+  box-shadow: 3px 3px 6px #babecc, -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.app-layout .copy-btn:active {
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+/* File upload zone */
+.app-layout .file-upload-zone {
+  background: #dde1e7;
+  border: none;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.app-layout .file-upload-zone.dragging {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px rgba(255, 255, 255, 0.45);
+}
+
+
+/* File cards */
+.app-layout .file-card {
+  background: #dde1e7;
+  border: none;
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.5), 2px 2px 5px rgba(94, 104, 121, 0.2);
+}
+
+.app-layout .file-card:hover {
+  box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.5), 3px 3px 6px rgba(94, 104, 121, 0.25);
+}
+
+.app-layout .file-card h3 {
+  color: #595959;
+}
+
+.app-layout .file-card p,
+.app-layout .file-card small {
+  color: #6b7280;
+}
+
+/* File action (Download) — neumorphic, orange on hover */
+.app-layout .file-action {
+  background: #dde1e7;
+  color: #595959;
+  padding: 0.65rem 1rem;
+  border-radius: 14px;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px rgba(255, 255, 255, 0.45);
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-layout .file-action:hover:not(:disabled) {
+  color: #ec7c2d;
+  box-shadow: 3px 3px 6px #babecc, -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.app-layout .file-action:active:not(:disabled) {
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.app-layout .empty-state {
+  color: #6b7280;
+}
+
+.app-layout .file-icon.material-symbols-outlined {
+  color: var(--accent);
 }
 
 /* Typography & Hierarchy */
@@ -140,14 +351,14 @@ h3 {
   font-size: 0.9rem;
 }
 
-/* Cards & Panels — modern block style */
+/* Cards & Panels — app-layout content blocks */
 .panel {
   background: #ffffff;
   border: 1px solid rgba(18, 52, 87, 0.08);
   border-radius: 16px;
   padding: 1.5rem 1.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -159,14 +370,14 @@ h3 {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(180deg, var(--accent), #0aa37f);
+  background: linear-gradient(180deg, #6b7280, #5a6578);
   border-radius: 16px 0 0 16px;
   opacity: 0.9;
 }
 
 .panel:hover {
-  border-color: rgba(0, 112, 143, 0.15);
-  box-shadow: 0 4px 16px rgba(0, 112, 143, 0.08);
+  border-color: rgba(0, 112, 143, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 112, 143, 0.06);
 }
 
 /* Form Stack */
@@ -235,10 +446,8 @@ h3 {
   font-family: var(--font-body);
 }
 
-.room-badge .material-symbols-outlined {
+.room-badge .room-badge-icon {
   color: var(--accent);
-  flex-shrink: 0;
-  font-size: 16px !important;
 }
 
 /* Button icon alignment */
@@ -287,6 +496,12 @@ h3 {
   z-index: 1;
 }
 
+.result-head-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .result-expiry {
   display: inline-flex;
   align-items: center;
@@ -295,6 +510,7 @@ h3 {
 
 .result-expiry .material-symbols-outlined {
   color: var(--accent);
+  vertical-align: middle;
 }
 
 .empty-state .empty-icon {
@@ -421,22 +637,26 @@ button:active::before,
   height: 300px;
 }
 
+/* Primary action — neumorphic gray everywhere (no green/teal) */
 button.btn-primary,
 .file-picker {
-  background: linear-gradient(135deg, #0aa37f, #006a86);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 170, 127, 0.25);
+  background: #dde1e7;
+  color: #595959;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px rgba(255, 255, 255, 0.45);
+  border: none;
+  transform: none;
 }
 
 button.btn-primary:hover,
 .file-picker:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 170, 127, 0.35);
+  color: #4a5568;
+  transform: none;
+  box-shadow: 3px 3px 6px #babecc, -6px -6px 12px rgba(255, 255, 255, 0.5);
 }
 
 button.btn-primary:active,
 .file-picker:active {
-  transform: translateY(0);
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
 }
 
 button:disabled,
@@ -642,49 +862,216 @@ button.btn-danger:hover {
   position: fixed;
   right: 1.25rem;
   bottom: 1.25rem;
-  background: linear-gradient(135deg, #0aa37f, #006a86);
+  background: #5a6578;
   color: #ffffff;
   border-radius: 10px;
   padding: 0.85rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0, 112, 143, 0.25);
+  box-shadow: 0 4px 20px rgba(94, 104, 121, 0.25);
   animation: slide-in 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   letter-spacing: 0.02em;
   z-index: 1000;
 }
 
-/* Standalone hero (login) — centered card */
-.app-shell:has(.hero-standalone) {
-  max-width: 440px;
-  margin: 0 auto;
-  padding-top: clamp(2rem, 10vh, 4rem);
+/* ========== Enter page (Neumorphism style) ========== */
+/* Ref: https://www.codingnepalweb.com/neumorphism-login-form-ui-design/ */
+.enter-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: transparent;
 }
 
-.hero-standalone {
-  text-align: center;
-  padding: 2rem 2.25rem !important;
-}
-
-.hero-standalone .hero-icon {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-standalone .hero-copy {
-  margin: 0.75rem 0 0;
-  font-size: 0.875rem;
-}
-
-.hero-standalone .room-form {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-.hero-standalone .btn-primary {
+.enter-page-shell {
   width: 100%;
-  margin-top: 0.25rem;
+  max-width: 380px;
+  margin: 0;
+  padding: 0;
+}
+
+.enter-card {
+  width: 100%;
+  padding: 2.5rem 2rem !important;
+  text-align: left;
+  background: #dde1e7;
+  border: none;
+  border-radius: 20px;
+  box-shadow:
+    -3px -3px 7px rgba(255, 255, 255, 0.45),
+    2px 2px 5px rgba(94, 104, 121, 0.29);
+}
+
+.enter-card::before {
+  display: none;
+}
+
+.enter-card:hover {
+  border-color: transparent;
+  box-shadow:
+    -3px -3px 7px rgba(255, 255, 255, 0.45),
+    2px 2px 5px rgba(94, 104, 121, 0.29);
+}
+
+.enter-card-brand {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.enter-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.25rem;
+  color: #595959;
+  background: #dde1e7;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 2px 2px 5px rgba(94, 104, 121, 0.29), -2px -2px 5px rgba(255, 255, 255, 0.45);
+}
+
+.enter-logo svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.enter-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.65rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #595959;
+}
+
+.enter-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.45;
+}
+
+.enter-form {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  max-width: none;
+}
+
+.enter-label {
+  display: none;
+}
+
+/* Neumorphic inset input (pressed-in) */
+.enter-input {
+  padding: 0.9rem 1rem 0.9rem 2.75rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background: #dde1e7;
+  color: #595959;
+  box-shadow:
+    inset 2px 2px 5px #babecc,
+    inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+  transition: box-shadow 0.2s ease;
+}
+
+.enter-input:focus {
+  background: #ffffff;
+  box-shadow:
+    inset 1px 1px 2px #babecc,
+    inset -1px -1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.enter-input::placeholder {
+  color: #6b7280;
+}
+
+.enter-card .input-icon,
+.enter-input-icon {
+  color: #6b7280;
+}
+
+.enter-input-icon svg {
+  display: block;
+}
+
+/* Neumorphic primary button — shared by enter page and app-layout (Sync Text, file picker) */
+.enter-btn,
+.app-layout .card-text .btn-primary,
+.app-layout .file-picker {
+  border: none;
+  outline: none;
+  font-weight: 700;
+  padding: 0.9rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 16px;
+  background: #dde1e7;
+  color: #595959;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px rgba(255, 255, 255, 0.45);
+  transition: color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transform: none;
+}
+
+.enter-btn:hover:not(:disabled),
+.app-layout .card-text .btn-primary:hover:not(:disabled),
+.app-layout .file-picker:hover:not(.disabled) {
+  color: #4a5568;
+  transform: none;
+  box-shadow: 3px 3px 6px #babecc, -6px -6px 12px rgba(255, 255, 255, 0.5);
+}
+
+.enter-btn:active:not(:disabled),
+.enter-btn:focus:not(:disabled),
+.app-layout .card-text .btn-primary:active:not(:disabled),
+.app-layout .card-text .btn-primary:focus:not(:disabled),
+.app-layout .file-picker:active:not(.disabled) {
+  color: #4a5568;
+  transform: none;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px rgba(255, 255, 255, 0.45);
+}
+
+.enter-btn {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.enter-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.enter-btn .enter-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.enter-btn .enter-btn-icon svg {
+  display: block;
+}
+
+.enter-btn .enter-btn-icon.spin svg {
+  animation: icon-spin 1s linear infinite;
+}
+
+.enter-hint {
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: none;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  line-height: 1.5;
+  box-shadow: 0 -1px 0 rgba(94, 104, 121, 0.1);
 }
 
 /* Config Panel */
@@ -765,20 +1152,31 @@ button.btn-danger:hover {
 @media (max-width: 640px) {
   .app-bar {
     flex-wrap: wrap;
-    padding: 0.6rem 0 0.85rem;
+    padding: 0.7rem 0 0.9rem;
+    gap: 0.75rem;
+  }
+
+  .app-bar-brand {
+    min-width: 0;
   }
 
   .app-bar-title {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
   }
 
   .app-bar-actions {
     width: 100%;
     justify-content: flex-end;
+    flex-wrap: wrap;
   }
 
   .app-shell {
     gap: 1.25rem;
+    padding-top: 0;
+  }
+
+  .app-intro {
+    font-size: 0.8125rem;
   }
 
   .content-grid {
@@ -803,7 +1201,10 @@ button.btn-danger:hover {
     max-width: 100%;
   }
 
-  button.btn-primary,
+  button.btn-primary {
+    width: 100%;
+  }
+
   .file-picker {
     width: 100%;
   }
